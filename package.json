@@ -1,0 +1,26 @@
+{
+    "name": "recursive-fs",
+    "version": "0.1.0",
+    "description": "Asynchronous recursive file system operations.",
+    "keywords": [
+        "asynchronous",
+        "recursive",
+        "file",
+        "system"
+    ],
+    "license": "MIT",
+    "homepage": "http://github.com/simov/recursive-fs",
+    "author": {
+        "name": "simo",
+        "email": "simeonvelichkov@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/simov/recursive-fs.git"
+    },
+    "devDependencies": {
+        "mocha": "*",
+        "should": "*"
+    },
+    "main": "./index"
+}
