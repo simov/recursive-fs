@@ -1,4 +1,9 @@
 
+#Install
+```
+$ npm install recursive-fs
+```
+
 #Recursive
 
 ##readdirr
