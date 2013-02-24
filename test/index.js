@@ -86,9 +86,9 @@ describe('recursive', function () {
     
     describe('remove', function () {
         it('directory', function (done) {
-            recursive.rmdirr(spath, function (err) {
+            recursive.rmdirr(tpath, function (err) {
                 if (err) return done(err);
-                fs.exists(spath, function (exists) {
+                fs.exists(tpath, function (exists) {
                     exists.should.equal(false);
                     done();
                 });
@@ -96,10 +96,31 @@ describe('recursive', function () {
         });
     });
 
-    after(function (done) {
-        recursive.rmdirr(tpath, function (err) {
-            if (err) return done(err);
-            done();
+    describe('remove', function () {
+        it('list of files', function (done) {
+            recursive.readdirr(spath, function (err, dirs, files) {
+                if (err) return done(err);
+                recursive.rmfiles(files, function (err) {
+                    if (err) return done(err);
+                    recursive.readdirr(spath, function (err, dirs, files) {
+                        if (err) return done(err);
+                        files.length.should.equal(0);
+                        done();
+                    });
+                });
+            });
+        });
+        it('list of directories', function (done) {
+            recursive.readdirr(spath, function (err, dirs, files) {
+                if (err) return done(err);
+                recursive.rmdirs(dirs, function (err) {
+                    if (err) return done(err);
+                    fs.exists(spath, function (exists) {
+                        exists.should.equal(false);
+                        done();
+                    });
+                });
+            });
         });
     });
 });
