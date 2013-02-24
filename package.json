@@ -1,12 +1,16 @@
 {
     "name": "recursive-fs",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Asynchronous recursive file system operations.",
     "keywords": [
         "asynchronous",
         "recursive",
         "file",
-        "system"
+        "system",
+        "read",
+        "copy",
+        "remove",
+        "directory"
     ],
     "license": "MIT",
     "homepage": "http://github.com/simov/recursive-fs",
