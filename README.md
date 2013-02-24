@@ -36,6 +36,22 @@ recursive.rmdirr(root, function (err) {
 });
 ```
 
+##cpdirr
+```js
+var path = require('path');
+var recursive = require('recursive-fs');
+
+var spath = path.resolve(process.argv[2]),
+    tpath = path.resolve(process.argv[3]);
+recursive.cpdirr(spath, tpath, function (err) {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('DONE!');
+    }
+});
+```
+
 ##Tests
 ```
 $ mocha
