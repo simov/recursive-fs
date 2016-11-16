@@ -1,10 +1,12 @@
 
-exports.readdirr = require('./lib/readdirr').readdirr;
+module.exports = {
+  readdirr: require('./lib/readdirr').readdirr,
 
-exports.rmdirr = require('./lib/rmdirr').rmdirr;
-exports.rmdirs = require('./lib/rmdirr').rmdirs;
-exports.rmfiles = require('./lib/rmdirr').rmfiles;
+  rmdirr: require('./lib/rmdirr').rmdirr,
+  rmdirs: require('./lib/rmdirr').rmdirs,
+  rmfiles: require('./lib/rmdirr').rmfiles,
 
-exports.cpdirr = require('./lib/cpdirr').cpdirr;
-exports.cpdirs = require('./lib/cpdirr').cpdirs;
-exports.cpfiles = require('./lib/cpdirr').cpfiles;
+  cpdirr: require('./lib/cpdirr').cpdirr,
+  cpdirs: require('./lib/cpdirr').cpdirs,
+  cpfiles: require('./lib/cpdirr').cpfiles
+}

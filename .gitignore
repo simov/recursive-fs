@@ -1,3 +1,5 @@
 npm-debug.log
 coverage/
 node_modules/
+test/input/
+test/output/
