@@ -28,14 +28,15 @@
   },
   "main": "index.js",
   "files": [
-    "lib/",
     "bin/",
+    "lib/",
     "LICENSE",
     "README.md",
     "index.js"
   ],
-  "directories": {
-    "bin": "./bin"
+  "bin": {
+    "recursive-copy": "./bin/recursive-copy",
+    "recursive-delete": "./bin/recursive-delete"
   },
   "scripts": {
     "test": "npm run test:ci",

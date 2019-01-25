@@ -64,14 +64,17 @@ recursive.cpdirr(spath, tpath, function (err) {
 # CLI
 
 ## recursive-delete
+
 ```
 npx recursive-delete 'relative/path/to/directory'
 ```
 
 ## recursive-copy
+
 ```
 npx recursive-copy 'relative/path/to/source/directory' 'relative/path/to/destination/directory'
 ```
+
 
   [npm-version]: https://img.shields.io/npm/v/recursive-fs.svg?style=flat-square (NPM Package Version)
   [travis-ci]: https://img.shields.io/travis/simov/recursive-fs/master.svg?style=flat-square (Build Status - Travis CI)
