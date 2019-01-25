@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+const recursive = require('../index')
+const path = require('path')
+const source = path.resolve(process.cwd(), process.argv[2])
+const destination = path.resolve(process.cwd(), process.argv[3])
+recursive.cpdirr(source, destination, function(error) {
+  if (error) console.error(error);
+})

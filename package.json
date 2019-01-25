@@ -10,7 +10,8 @@
     "read",
     "copy",
     "remove",
-    "directory"
+    "directory",
+    "cli"
   ],
   "license": "MIT",
   "homepage": "https://github.com/simov/recursive-fs",
@@ -28,10 +29,14 @@
   "main": "index.js",
   "files": [
     "lib/",
+    "bin/",
     "LICENSE",
     "README.md",
     "index.js"
   ],
+  "directories": {
+    "bin": "./bin"
+  },
   "scripts": {
     "test": "npm run test:ci",
     "test:ci": "mocha test/",

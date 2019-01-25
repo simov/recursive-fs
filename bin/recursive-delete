@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+const recursive = require('../index');
+const path = require('path');
+const folder = path.resolve(process.cwd(), process.argv[2]);
+recursive.rmdirr(folder, function(error) {
+  if (error && error.code !== 'ENOENT') console.error(error);
+});
