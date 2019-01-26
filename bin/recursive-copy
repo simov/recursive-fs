@@ -5,4 +5,8 @@ var path = require('path')
 var source = path.resolve(process.cwd(), process.argv[2])
 var destination = path.resolve(process.cwd(), process.argv[3])
 
-recursive.cpdirr(source, destination, console.error)
+recursive.cpdirr(source, destination, function (err) {
+  if (err) {
+    console.error(err)
+  }
+})

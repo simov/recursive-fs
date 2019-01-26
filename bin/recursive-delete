@@ -4,4 +4,8 @@ var recursive = require('../')
 var path = require('path')
 var folder = path.resolve(process.cwd(), process.argv[2])
 
-recursive.rmdirr(folder, console.error)
+recursive.rmdirr(folder, function (err) {
+  if (err && err.code !== 'ENOENT') {
+    console.error(err)
+  }
+})
