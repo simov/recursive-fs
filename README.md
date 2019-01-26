@@ -7,12 +7,12 @@
 ## readdirr
 
 ```js
-var path = require('path')
 var recursive = require('recursive-fs')
 
-var spath = path.resolve(process.cwd(), process.argv[2])
+var path = require('path')
+var directory = path.resolve(process.cwd(), process.argv[2])
 
-recursive.readdirr(spath, function (err, dirs, files) {
+recursive.readdirr(directory, function (err, dirs, files) {
   if (err) {
     console.log(err)
   } else {
@@ -27,12 +27,12 @@ recursive.readdirr(spath, function (err, dirs, files) {
 ## rmdirr
 
 ```js
-var path = require('path')
 var recursive = require('recursive-fs')
 
-var spath = path.resolve(process.cwd(), process.argv[2])
+var path = require('path')
+var directory = path.resolve(process.cwd(), process.argv[2])
 
-recursive.rmdirr(spath, function (err) {
+recursive.rmdirr(directory, function (err) {
   if (err) {
     console.log(err)
   } else {
@@ -45,13 +45,13 @@ recursive.rmdirr(spath, function (err) {
 ## cpdirr
 
 ```js
-var path = require('path')
 var recursive = require('recursive-fs')
 
-var spath = path.resolve(process.cwd(), process.argv[2])
-var tpath = path.resolve(process.cwd(), process.argv[3])
+var path = require('path')
+var source = path.resolve(process.cwd(), process.argv[2])
+var destination = path.resolve(process.cwd(), process.argv[3])
 
-recursive.cpdirr(spath, tpath, function (err) {
+recursive.cpdirr(source, destination, function (err) {
   if (err) {
     console.log(err)
   } else {
@@ -61,18 +61,17 @@ recursive.cpdirr(spath, tpath, function (err) {
 ```
 
 
-# CLI
+## recursive-copy
+
+```bash
+npx recursive-copy 'path/to/source/directory' 'path/to/destination/directory'
+```
+
 
 ## recursive-delete
 
-```
-npx recursive-delete 'relative/path/to/directory'
-```
-
-## recursive-copy
-
-```
-npx recursive-copy 'relative/path/to/source/directory' 'relative/path/to/destination/directory'
+```bash
+npx recursive-delete 'path/to/directory'
 ```
 
 
