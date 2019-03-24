@@ -7,5 +7,6 @@ var folder = path.resolve(process.cwd(), process.argv[2])
 recursive.rmdirr(folder, function (err) {
   if (err && err.code !== 'ENOENT') {
     console.error(err)
+    process.exit(1)
   }
 })

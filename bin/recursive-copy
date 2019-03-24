@@ -8,5 +8,6 @@ var destination = path.resolve(process.cwd(), process.argv[3])
 recursive.cpdirr(source, destination, function (err) {
   if (err) {
     console.error(err)
+    process.exit(1)
   }
 })
