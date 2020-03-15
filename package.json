@@ -30,9 +30,10 @@
   "files": [
     "bin/",
     "lib/",
+    "index.js",
     "LICENSE",
-    "README.md",
-    "index.js"
+    "package.json",
+    "README.md"
   ],
   "bin": {
     "recursive-copy": "./bin/recursive-copy",
