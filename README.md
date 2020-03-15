@@ -3,18 +3,19 @@
 
 [![npm-version]][npm] [![travis-ci]][travis] [![coveralls-status]][coveralls]
 
+> _Asynchronous Recursive File System Operations_
 
-## readdirr
+## read
 
 ```js
-var {readdirr} = require('recursive-fs')
+var rfs = require('recursive-fs')
 
 var path = require('path')
 var directory = path.resolve(process.cwd(), process.argv[2])
 
 ;(async () => {
   try {
-    var {dirs, files} = await readdirr(directory)
+    var {dirs, files} = await rfs.read(directory)
     console.log(dirs)
     console.log(files)
     console.log('DONE!')
@@ -26,17 +27,18 @@ var directory = path.resolve(process.cwd(), process.argv[2])
 ```
 
 
-## rmdirr
+## remove
 
 ```js
-var {rmdirr} = require('recursive-fs')
+var rfs = require('recursive-fs')
 
 var path = require('path')
 var directory = path.resolve(process.cwd(), process.argv[2])
 
 ;(async () => {
   try {
-    await rmdirr(directory)
+    await rfs.remove(directory)
+    console.log('DONE!')
   }
   catch (err) {
     console.error(err)
@@ -45,10 +47,10 @@ var directory = path.resolve(process.cwd(), process.argv[2])
 ```
 
 
-## cpdirr
+## copy
 
 ```js
-var {cpdirr} = require('recursive-fs')
+var rfs = require('recursive-fs')
 
 var path = require('path')
 var source = path.resolve(process.cwd(), process.argv[2])
@@ -56,7 +58,8 @@ var destination = path.resolve(process.cwd(), process.argv[3])
 
 ;(async () => {
   try {
-    await cpdirr(source, destination)
+    await rfs.copy(source, destination)
+    console.log('DONE!')
   }
   catch (err) {
     console.error(err)
@@ -64,6 +67,7 @@ var destination = path.resolve(process.cwd(), process.argv[3])
 })()
 ```
 
+---
 
 ## recursive-copy
 

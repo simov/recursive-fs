@@ -2,7 +2,7 @@
 var t = require('assert').strict
 var fs = require('fs')
 var path = require('path')
-var recursive = require('../')
+var rfs = require('../')
 var fixtures = require('./fixtures')
 
 
@@ -23,52 +23,50 @@ describe('promise', () => {
 
   after(async () => {
     try {
-      await recursive.rmdirr(spath)
-      await recursive.rmdirr(tpath)
+      await rfs.remove(spath)
+      await rfs.remove(tpath)
     }
     catch (err) {}
   })
 
-  it('readdirr', async () => {
-    var {dirs, files} = await recursive.readdirr(spath)
+  it('read', async () => {
+    var {dirs, files} = await rfs.read(spath)
     t.equal(dirs.length, fixtures.dirs.length + 1)
     t.equal(files.length, fixtures.files.length)
   })
 
-  it('cpdirr', async () => {
-    await recursive.cpdirr(spath, tpath)
-    var {dirs, files} = await recursive.readdirr(tpath)
+  it('copy', async () => {
+    await rfs.copy(spath, tpath)
+    var {dirs, files} = await rfs.read(tpath)
     t.equal(dirs.length, fixtures.dirs.length + 1)
     t.equal(files.length, fixtures.files.length)
   })
-
   it('copy directories', async () => {
-    var {dirs} = await recursive.readdirr(spath)
-    await recursive.cpdirs(spath, tpath, dirs)
-    var {dirs, files} = await recursive.readdirr(tpath)
+    var {dirs} = await rfs.read(spath)
+    await rfs.cpdirs(spath, tpath, dirs)
+    var {dirs, files} = await rfs.read(tpath)
     t.equal(dirs.length, fixtures.dirs.length + 1)
   })
   it('copy files', async () => {
-    var {files} = await recursive.readdirr(spath)
-    await recursive.cpfiles(spath, tpath, files)
-    var {dirs, files} = await recursive.readdirr(tpath)
+    var {files} = await rfs.read(spath)
+    await rfs.cpfiles(spath, tpath, files)
+    var {dirs, files} = await rfs.read(tpath)
     t.equal(files.length, fixtures.files.length)
   })
 
-  it('rmdirr', async () => {
-    await recursive.rmdirr(tpath)
+  it('remove', async () => {
+    await rfs.remove(tpath)
     t.equal(fs.existsSync(tpath), false)
   })
-
   it('remove files', async () => {
-    var {files} = await recursive.readdirr(spath)
-    await recursive.rmfiles(files)
-    var {files} = await recursive.readdirr(spath)
+    var {files} = await rfs.read(spath)
+    await rfs.rmfiles(files)
+    var {files} = await rfs.read(spath)
     t.equal(files.length, 0)
   })
   it('remove directories', async () => {
-    var {dirs} = await recursive.readdirr(spath)
-    await recursive.rmdirs(dirs)
+    var {dirs} = await rfs.read(spath)
+    await rfs.rmdirs(dirs)
     t.equal(fs.existsSync(spath), false)
   })
 })

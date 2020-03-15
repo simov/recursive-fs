@@ -2,7 +2,7 @@
 var t = require('assert').strict
 var fs = require('fs')
 var path = require('path')
-var recursive = require('../')
+var rfs = require('../')
 var fixtures = require('./fixtures')
 
 
@@ -22,15 +22,15 @@ describe('callback', () => {
   })
 
   after((done) => {
-    recursive.rmdirr(spath, () => {
-      recursive.rmdirr(tpath, () => {
+    rfs.rmdirr(spath, () => {
+      rfs.rmdirr(tpath, () => {
         done()
       })
     })
   })
 
   it('readdirr', (done) => {
-    recursive.readdirr(spath, (err, dirs, files) => {
+    rfs.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
       t.equal(dirs.length, fixtures.dirs.length + 1)
       t.equal(files.length, fixtures.files.length)
@@ -39,9 +39,9 @@ describe('callback', () => {
   })
 
   it('cpdirr', (done) => {
-    recursive.cpdirr(spath, tpath, (err) => {
+    rfs.cpdirr(spath, tpath, (err) => {
       if (err) return done(err)
-      recursive.readdirr(tpath, (err, dirs, files) => {
+      rfs.readdirr(tpath, (err, dirs, files) => {
         if (err) return done(err)
         t.equal(dirs.length, fixtures.dirs.length + 1)
         t.equal(files.length, fixtures.files.length)
@@ -51,11 +51,11 @@ describe('callback', () => {
   })
 
   it('copy directories', (done) => {
-    recursive.readdirr(spath, (err, dirs, files) => {
+    rfs.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
-      recursive.cpdirs(spath, tpath, dirs, (err) => {
+      rfs.cpdirs(spath, tpath, dirs, (err) => {
         if (err) return done(err)
-        recursive.readdirr(tpath, (err, dirs, files) => {
+        rfs.readdirr(tpath, (err, dirs, files) => {
           if (err) return done(err)
           t.equal(dirs.length, fixtures.dirs.length + 1)
           done()
@@ -64,11 +64,11 @@ describe('callback', () => {
     })
   })
   it('copy files', (done) => {
-    recursive.readdirr(spath, (err, dirs, files) => {
+    rfs.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
-      recursive.cpfiles(spath, tpath, files, (err) => {
+      rfs.cpfiles(spath, tpath, files, (err) => {
         if (err) return done(err)
-        recursive.readdirr(tpath, (err, dirs, files) => {
+        rfs.readdirr(tpath, (err, dirs, files) => {
           if (err) return done(err)
           t.equal(files.length, fixtures.files.length)
           done()
@@ -78,7 +78,7 @@ describe('callback', () => {
   })
 
   it('rmdirr', (done) => {
-    recursive.rmdirr(tpath, (err) => {
+    rfs.rmdirr(tpath, (err) => {
       if (err) return done(err)
       fs.exists(tpath, (exists) => {
         t.equal(exists, false)
@@ -88,11 +88,11 @@ describe('callback', () => {
   })
 
   it('remove files', (done) => {
-    recursive.readdirr(spath, (err, dirs, files) => {
+    rfs.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
-      recursive.rmfiles(files, (err) => {
+      rfs.rmfiles(files, (err) => {
         if (err) return done(err)
-        recursive.readdirr(spath, (err, dirs, files) => {
+        rfs.readdirr(spath, (err, dirs, files) => {
           if (err) return done(err)
           t.equal(files.length, 0)
           done()
@@ -101,9 +101,9 @@ describe('callback', () => {
     })
   })
   it('remove directories', (done) => {
-    recursive.readdirr(spath, (err, dirs, files) => {
+    rfs.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
-      recursive.rmdirs(dirs, (err) => {
+      rfs.rmdirs(dirs, (err) => {
         if (err) return done(err)
         fs.exists(spath, (exists) => {
           t.equal(exists, false)
