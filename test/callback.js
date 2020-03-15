@@ -6,31 +6,31 @@ var recursive = require('../')
 var fixtures = require('./fixtures')
 
 
-describe('recursive', function () {
+describe('callback', () => {
   var spath = path.join(__dirname, 'input')
   var tpath = path.join(__dirname, 'output')
 
-  before(function () {
+  before(() => {
     fs.mkdirSync(spath)
-    fixtures.dirs.forEach(function (fixture) {
+    fixtures.dirs.forEach((fixture) => {
       fs.mkdirSync(path.join(spath, fixture))
     })
-    fixtures.files.forEach(function (fixture) {
+    fixtures.files.forEach((fixture) => {
       var fpath = path.join(spath, fixture)
       fs.writeFileSync(fpath, 'data', 'utf8')
     })
   })
 
-  after(function (done) {
-    recursive.rmdirr(spath, function () {
-      recursive.rmdirr(tpath, function () {
+  after((done) => {
+    recursive.rmdirr(spath, () => {
+      recursive.rmdirr(tpath, () => {
         done()
       })
     })
   })
 
-  it('readdirr', function (done) {
-    recursive.readdirr(spath, function (err, dirs, files) {
+  it('readdirr', (done) => {
+    recursive.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
       t.equal(dirs.length, fixtures.dirs.length + 1)
       t.equal(files.length, fixtures.files.length)
@@ -38,10 +38,10 @@ describe('recursive', function () {
     })
   })
 
-  it('cpdirr', function (done) {
-    recursive.cpdirr(spath, tpath, function (err) {
+  it('cpdirr', (done) => {
+    recursive.cpdirr(spath, tpath, (err) => {
       if (err) return done(err)
-      recursive.readdirr(tpath, function (err, dirs, files) {
+      recursive.readdirr(tpath, (err, dirs, files) => {
         if (err) return done(err)
         t.equal(dirs.length, fixtures.dirs.length + 1)
         t.equal(files.length, fixtures.files.length)
@@ -50,12 +50,12 @@ describe('recursive', function () {
     })
   })
 
-  it('copy directories', function (done) {
-    recursive.readdirr(spath, function (err, dirs, files) {
+  it('copy directories', (done) => {
+    recursive.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
-      recursive.cpdirs(spath, tpath, dirs, function (err) {
+      recursive.cpdirs(spath, tpath, dirs, (err) => {
         if (err) return done(err)
-        recursive.readdirr(tpath, function (err, dirs, files) {
+        recursive.readdirr(tpath, (err, dirs, files) => {
           if (err) return done(err)
           t.equal(dirs.length, fixtures.dirs.length + 1)
           done()
@@ -63,12 +63,12 @@ describe('recursive', function () {
       })
     })
   })
-  it('copy files', function (done) {
-    recursive.readdirr(spath, function (err, dirs, files) {
+  it('copy files', (done) => {
+    recursive.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
-      recursive.cpfiles(spath, tpath, files, function (err) {
+      recursive.cpfiles(spath, tpath, files, (err) => {
         if (err) return done(err)
-        recursive.readdirr(tpath, function (err, dirs, files) {
+        recursive.readdirr(tpath, (err, dirs, files) => {
           if (err) return done(err)
           t.equal(files.length, fixtures.files.length)
           done()
@@ -77,22 +77,22 @@ describe('recursive', function () {
     })
   })
 
-  it('rmdirr', function (done) {
-    recursive.rmdirr(tpath, function (err) {
+  it('rmdirr', (done) => {
+    recursive.rmdirr(tpath, (err) => {
       if (err) return done(err)
-      fs.exists(tpath, function (exists) {
+      fs.exists(tpath, (exists) => {
         t.equal(exists, false)
         done()
       })
     })
   })
 
-  it('remove files', function (done) {
-    recursive.readdirr(spath, function (err, dirs, files) {
+  it('remove files', (done) => {
+    recursive.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
-      recursive.rmfiles(files, function (err) {
+      recursive.rmfiles(files, (err) => {
         if (err) return done(err)
-        recursive.readdirr(spath, function (err, dirs, files) {
+        recursive.readdirr(spath, (err, dirs, files) => {
           if (err) return done(err)
           t.equal(files.length, 0)
           done()
@@ -100,12 +100,12 @@ describe('recursive', function () {
       })
     })
   })
-  it('remove directories', function (done) {
-    recursive.readdirr(spath, function (err, dirs, files) {
+  it('remove directories', (done) => {
+    recursive.readdirr(spath, (err, dirs, files) => {
       if (err) return done(err)
-      recursive.rmdirs(dirs, function (err) {
+      recursive.rmdirs(dirs, (err) => {
         if (err) return done(err)
-        fs.exists(spath, function (exists) {
+        fs.exists(spath, (exists) => {
           t.equal(exists, false)
           done()
         })

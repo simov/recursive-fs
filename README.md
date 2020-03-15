@@ -7,57 +7,61 @@
 ## readdirr
 
 ```js
-var recursive = require('recursive-fs')
+var {readdirr} = require('recursive-fs')
 
 var path = require('path')
 var directory = path.resolve(process.cwd(), process.argv[2])
 
-recursive.readdirr(directory, function (err, dirs, files) {
-  if (err) {
-    console.log(err)
-  } else {
+;(async () => {
+  try {
+    var {dirs, files} = await readdirr(directory)
     console.log(dirs)
     console.log(files)
     console.log('DONE!')
   }
-})
+  catch (err) {
+    console.error(err)
+  }
+})()
 ```
 
 
 ## rmdirr
 
 ```js
-var recursive = require('recursive-fs')
+var {rmdirr} = require('recursive-fs')
 
 var path = require('path')
 var directory = path.resolve(process.cwd(), process.argv[2])
 
-recursive.rmdirr(directory, function (err) {
-  if (err) {
-    console.log(err)
-  } else {
-    console.log('DONE!')
+;(async () => {
+  try {
+    await rmdirr(directory)
   }
-})
+  catch (err) {
+    console.error(err)
+  }
+})()
 ```
 
 
 ## cpdirr
 
 ```js
-var recursive = require('recursive-fs')
+var {cpdirr} = require('recursive-fs')
 
 var path = require('path')
 var source = path.resolve(process.cwd(), process.argv[2])
 var destination = path.resolve(process.cwd(), process.argv[3])
 
-recursive.cpdirr(source, destination, function (err) {
-  if (err) {
-    console.log(err)
-  } else {
-    console.log('DONE!')
+;(async () => {
+  try {
+    await cpdirr(source, destination)
   }
-})
+  catch (err) {
+    console.error(err)
+  }
+})()
 ```
 
 
